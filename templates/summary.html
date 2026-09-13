@@ -2,7 +2,7 @@
 <html lang="pl">
   <head>
     <meta charset="UTF-8" />
-    <title>Mój Chatbot AI</title>
+    <title>Streszczenie AI</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
@@ -15,25 +15,25 @@
         <a href="/analysis-site">Analizuj dane </a> |
         <a href="/summary-site">Streszcz dowolny tekst </a>
       </nav>
-      <h1>Zapytaj AI</h1>
-      <form action="/ask" method="POST">
+      <h1>Streszczenie AI</h1>
+      <form action="/summarize" method="POST">
         <textarea
-          name="pytanie"
-          id="pytanie"
+          name="tekst"
+          id="tekst"
           rows="4"
-          placeholder="Wpisz swoje pytanie ."
+          placeholder="Wpisz tekst do streszczenia."
         >
         </textarea>
         <button type="submit">Wyślij</button>
       </form>
-      {% if pytanie %}
-      <p><em>Twoje pytanie: {{ pytanie }} </em></p>
+      {% if tekst %}
+      <p><em>Twój tekst: {{ tekst }} </em></p>
       {% endif %}
       <div class="answer-box">
-        {% if odpowiedz %}
-        <p>{{ odpowiedz }}</p>
+        {% if streszczenie %}
+        <p>{{ streszczenie }}</p>
         {% else %}
-        <p>Tutaj pojawi się odpowiedź AI.</p>
+        <p>Tutaj pojawi się streszczenie AI.</p>
         {% endif %}
       </div>
     </main>
