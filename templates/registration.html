@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mój Chatbot AI</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <main class="container">
+      <form action="/registration" method="POST">
+        <input
+          type="text"
+          name="nazwa_uzytkownika"
+          placeholder="Nazwa użytkownika"
+          required
+        />
+        <input type="password" name="haslo" placeholder="Hasło" required />
+        <button type="submit">Zarejestruj się</button>
+      </form>
+      {% if blad %}
+      <p class="answer-box">{{ blad }}</p>
+      {% endif %} {% if sukces %}
+      <p class="answer-box">{{ sukces }} <a href="/login">Zaloguj się </a></p>
+      {% endif %}
+      <p style="font-size: 14px; color: #666">
+        Rejestrując się, akceptujesz, że treść Twoich zapytań i przesyłanych
+        plików będzie przetwarzana przez zewnętrzny model AI (Claude, firmy
+        Anthropic) w celu wygenerowania odpowiedzi.
+      </p>
+    </main>
+  </body>
+</html>

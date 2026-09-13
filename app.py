@@ -1,6 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect, url_for
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from flask_talisman import Talisman
+from flask_bcrypt import Bcrypt
+import json
 import os
 import io
 import base64
@@ -8,6 +11,7 @@ from datetime import datetime
 import pandas as pd
 import markdown as md_lib
 import matplotlib
+from functools import wraps
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -24,6 +28,7 @@ from anthropic import (
 load_dotenv()
 client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 MODEL = "claude-haiku-4-5-20251001"
+USER_FILES = "users.json"
 MAX_TOKENS = 1024
 PREVIEW_ROWS = 50
 MAX_QUESTION_LENGTH = 1000
@@ -52,11 +57,36 @@ prompts = {
 }
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
+app.secret_key = os.environ.get("SECRET_KEY", "zmien-mnie-koniecznie-w-produkcji")
 limiter = Limiter(
     app=app,
     key_func=get_remote_address,
     default_limits=["50 per hour"],
 )
+
+talisman = Talisman(
+    app,
+    force_https=False,  # lokalnie: False. Na serwerze: True
+    content_security_policy={
+        "default-src": "'self'",
+        "style-src": ["'self'", "'unsafe-inline'"],
+        "script-src": ["'self'", "https: /cdn.jsdelivr.net"],
+    },
+)
+
+
+def load_users():
+    try:
+        with open(USER_FILES, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+    
+
+def save_users(users):
+    with open(USER_FILES, "w", encoding="utf-8") as f:
+        json.dump(users, f, ensure_ascii=False, indent=2)
 
 
 def validate_output(answer):
@@ -208,6 +238,15 @@ def clean_text(text):
     return text
 
 
+def requires_login(function):
+    @wraps(function)
+    def decorated_function(*args, **kwargs):
+        if "user_name" not in session:
+            return redirect(url_for("login"))
+        return function(*args, **kwargs)
+    return decorated_function
+
+
 @limiter.exempt
 @app.route("/")
 def main_page():
@@ -216,6 +255,7 @@ def main_page():
 
 @limiter.limit("10 per minute; 200 per day")
 @app.route("/ask", methods=["POST"])
+@requires_login
 def ask():
     question = request.form.get("pytanie", "").strip()
     question = clean_text(question)
@@ -261,6 +301,7 @@ def summary_site():
 
 @limiter.limit("10 per minute; 200 per day")
 @app.route("/summarize", methods=["POST"])
+@requires_login
 def summarize():
     text = request.form.get("tekst", "").strip()
     text = clean_text(text)
@@ -297,6 +338,7 @@ def analysis_site():
 
 @limiter.limit("5 per minute; 100 per day")
 @app.route("/analise", methods=["POST"])
+@requires_login
 def analyse():
     file = request.files.get("csv_file")
 
@@ -353,6 +395,51 @@ def analyse():
         podsumowanie_ai=summary,
         report_link=report_link,
     )
+
+
+@app.route("/registration", methods=["GET", "POST"])
+def registration():
+    if request.method == "GET":
+        return render_template("registration.html")
+    user_name = request.form.get("nazwa_uzytkownika", "").strip()
+    password = request.form.get("haslo", "")
+
+    if user_name == "" or password == "":
+        return render_template("registration.html", blad="Wypełnij oba pola.")
+    if len(password) < 8:
+        return render_template("registration.html", blad="Hasło musi mieć minimum 8 znaków.")
+    users = load_users()
+    if user_name in users:
+        return render_template("registration.html", blad="Nazwa użytkownika jest już zajęta.")
+    
+    hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
+    users[user_name] = {"password_hash": hashed_password}
+    save_users(users)
+
+    return render_template("registration.html", sukces="Konto utworzone!")
+
+
+@limiter.limit("5 per minute")
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "GET":
+        return render_template("login.html")
+    user_name = request.form.get("nazwa_uzytkownika", "").strip()
+    password = request.form.get("haslo", "")
+
+    users = load_users()
+    user = users.get(user_name)
+    if user is None or not bcrypt.check_password_hash(user["password_hash"], password):
+        return render_template("login.html", blad="Błędna nazwa użytkownika lub hasło.")
+    
+    session["user_name"] = user_name
+    return redirect(url_for("main_page"))
+
+
+@app.route("/logout")
+def logout():
+    session.pop("user_name", None)
+    return redirect(url_for("login"))
 
 
 @app.errorhandler(429)
