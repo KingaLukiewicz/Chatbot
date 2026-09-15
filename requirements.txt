@@ -109,7 +109,7 @@ networkx==3.4.2
 numpy==1.26.4
 nvidia-ml-py==13.610.43
 onnx==1.17.0
-onnxruntime==1.15.1
+onnxruntime>=1.15.1
 openai==1.59.7
 opencv-python==4.11.0.86
 opencv-python-headless==4.11.0.86
