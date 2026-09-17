@@ -106,11 +106,11 @@ def looks_like_injection(text):
 
 def ask_claude(question, system_prompt=None):
     try:
-        parameters = client.messages.create(
-            model=MODEL,
-            max_tokens=MAX_TOKENS,
-            messages=[{"role": "user", "content": question}],
-        )
+        parameters = {
+            "model": MODEL,
+            "max_tokens": MAX_TOKENS,
+            "messages": [{"role": "user", "content": question}],
+        }
         if system_prompt:
             parameters["system"] = system_prompt
 
