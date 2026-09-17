@@ -5,25 +5,36 @@
     <title>Mój Chatbot AI</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
+      href="{{ url_for('static', filename='login.css') }}"
     />
   </head>
   <body>
     <main class="container">
-      <form action="/login" method="POST">
-        <input
-          type="text"
-          name="nazwa_uzytkownika"
-          placeholder="Nazwa użytkownika"
-          required
-        />
-        <input type="password" name="haslo" placeholder="Hasło" required />
-        <button type="submit">Zaloguj się</button>
-      </form>
-      {% if blad %}
-      <p class="answer-box">{{ blad }}</p>
-      {% endif %}
-      <p><a href="/registration">Nie masz konta? Zarejestruj się </a></p>
+      <section class="leftBox">
+        <div class="logLeft">
+          <h1>Witaj w Chatbot!</h1>
+          <p>Nie masz konta?</p>
+
+          <a href="/registration">
+            <button class="leftButton" type="button">Zarejestruj się!</button>
+          </a>
+        </div>
+      </section>
+      <section class="logRight">
+        <form action="/login" method="POST">
+          <input
+            type="text"
+            name="nazwa_uzytkownika"
+            placeholder="Nazwa użytkownika"
+            required
+          />
+          <input type="password" name="haslo" placeholder="Hasło" required />
+          <button type="submit">Zaloguj się</button>
+          {% if blad %}
+          <p class="errorMessage">{{ blad }}</p>
+          {% endif %}
+        </form>
+      </section>
     </main>
   </body>
 </html>

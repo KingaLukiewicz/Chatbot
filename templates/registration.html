@@ -5,31 +5,46 @@
     <title>Mój Chatbot AI</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
+      href="{{ url_for('static', filename='registration.css') }}"
     />
   </head>
   <body>
     <main class="container">
-      <form action="/registration" method="POST">
-        <input
-          type="text"
-          name="nazwa_uzytkownika"
-          placeholder="Nazwa użytkownika"
-          required
-        />
-        <input type="password" name="haslo" placeholder="Hasło" required />
-        <button type="submit">Zarejestruj się</button>
-      </form>
-      {% if blad %}
-      <p class="answer-box">{{ blad }}</p>
-      {% endif %} {% if sukces %}
-      <p class="answer-box">{{ sukces }} <a href="/login">Zaloguj się </a></p>
-      {% endif %}
-      <p style="font-size: 14px; color: #666">
-        Rejestrując się, akceptujesz, że treść Twoich zapytań i przesyłanych
-        plików będzie przetwarzana przez zewnętrzny model AI (Claude, firmy
-        Anthropic) w celu wygenerowania odpowiedzi.
-      </p>
+      <section class="registerLeft">
+        <form action="/registration" method="POST">
+          <input
+            type="text"
+            name="nazwa_uzytkownika"
+            placeholder="Nazwa użytkownika"
+            required
+          />
+          <input type="password" name="haslo" placeholder="Hasło" required />
+          <button type="submit">Zarejestruj się</button>
+        </form>
+
+        {% if blad %}
+        <p class="errorMessage">{{ blad }}</p>
+        {% endif %} {% if sukces %}
+        <p class="successMessage">
+          {{ sukces }} <a href="/login">Zaloguj się </a>
+        </p>
+        {% endif %}
+        <p class="infoMessage">
+          Rejestrując się, akceptujesz, że treść Twoich zapytań i przesyłanych
+          plików będzie przetwarzana przez zewnętrzny model AI (Claude, firmy
+          Anthropic) w celu wygenerowania odpowiedzi.
+        </p>
+      </section>
+      <section class="rightBox">
+        <div class="registerRight">
+          <h1>Witaj z powrotem!</h1>
+          <p>Masz już konto?</p>
+
+          <a href="/login">
+            <button type="button">Zaloguj się</button>
+          </a>
+        </div>
+      </section>
     </main>
   </body>
 </html>

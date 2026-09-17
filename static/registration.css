@@ -1,0 +1,155 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  overflow: hidden;
+}
+
+.rightBox {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40vw;
+  height: 100vh;
+  background-color: #168aad;
+  opacity: 90%;
+  border-top-left-radius: 200px;
+  border-bottom-left-radius: 200px;
+  z-index: 0;
+}
+
+.registerRight {
+  color: white;
+  font-weight: bold;
+  width: 40vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.registerRight h1 {
+  font-size: 4.2vw;
+  margin: 0 0 1vw 0;
+}
+
+.registerRight p {
+  font-size: 2vw;
+  margin: 0 0 2vw 0;
+}
+
+.registerRight button {
+  font-size: 1.5vw;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 1vw 3vw;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.registerRight button:hover {
+  background-color: white;
+  color: #168aad;
+}
+
+.registerLeft {
+  width: 60vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.registerLeft form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.registerLeft form::before {
+  content: "Utwórz konto";
+  color: black;
+  font-weight: bold;
+  font-size: 4.2vw;
+  margin-bottom: 5vh;
+}
+
+.registerLeft input {
+  width: 30vw;
+  height: 3vw;
+  margin-bottom: 1.5vw;
+  padding: 0 1vw;
+
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 1.2vw;
+}
+
+.registerLeft button[type="submit"] {
+  background-color: #168aad;
+  color: white;
+  border: none;
+  border-radius: 10px;
+
+  width: 30vw;
+  height: 4vw;
+
+  font-size: 1.5vw;
+  cursor: pointer;
+}
+
+.registerLeft button[type="submit"]:hover {
+  background-color: #126f8a;
+}
+
+.errorMessage {
+  color: #d22b2b;
+  font-size: 1.2vw;
+  margin: 2vh 0 0 0;
+}
+
+.successMessage {
+  color: #168aad;
+  font-size: 1.2vw;
+  margin: 2vh 0 0 0;
+}
+
+.successMessage a {
+  color: #168aad;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.successMessage a:hover {
+  text-decoration: underline;
+}
+
+.infoMessage {
+  color: #666;
+  font-size: 14px;
+  width: 30vw;
+  line-height: 1.5;
+  margin: 3vh 0 0 0;
+}

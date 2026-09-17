@@ -1,38 +1,157 @@
 body {
   margin: 0;
-  font-family: "Georgia", "Times New Roman", serif;
-  background-color: #fafafa;
-  color: #222;
+  font-family: system-ui, sans-serif;
+  background-color: #f4f4f8;
+  color: #2c2c54;
   line-height: 1.6;
 }
+
 .raport {
-  max-width: 720px;
+  max-width: 800px;
   margin: 40px auto;
-  padding: 48px;
+  padding: 40px;
+
   background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+  border: 1px solid #e2e2e8;
+  border-radius: 12px;
+
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
 }
+
 .raport-naglowek {
-  border-bottom: 3px solid #0097e6;
+  padding-bottom: 16px;
   margin-bottom: 32px;
+
+  border-bottom: 3px solid #168aad;
 }
+
+.raport-naglowek h1 {
+  margin: 0 0 8px 0;
+  color: #184e77;
+}
+
+.raport-naglowek p {
+  margin: 0;
+  color: #666;
+}
+
 .badge {
-  background-color: #0097e6;
+  display: inline-block;
+
+  background-color: #168aad;
   color: white;
+
   font-size: 13px;
-  padding: 4px 12px;
-  border-radius: 999px;
+  font-weight: 600;
+
+  padding: 5px 12px;
+
+  border-radius: 8px;
 }
+
+.raport h2 {
+  color: #184e77;
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+
+.raport h3 {
+  color: #168aad;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.raport p {
+  margin: 10px 0;
+}
+
+.raport ul,
+.raport ol {
+  padding-left: 24px;
+}
+
+.raport li {
+  margin-bottom: 6px;
+}
+
+.raport table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.raport th {
+  padding: 10px;
+  text-align: left;
+
+  color: white;
+  background-color: #168aad;
+
+  border: 1px solid #127390;
+}
+
+.raport td {
+  padding: 10px;
+
+  border: 1px solid #e2e2e8;
+}
+
+.raport tr:nth-child(even) {
+  background-color: #f4f4f8;
+}
+
+.wykres {
+  margin: 32px 0;
+  text-align: center;
+}
+
 .wykres img {
   max-width: 100%;
+  height: auto;
+
+  border: 1px solid #e2e2e8;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .raport {
+    width: 92%;
+    margin: 20px auto;
+    padding: 24px;
+  }
+
+  .raport-naglowek h1 {
+    font-size: 26px;
+  }
+
+  .raport table {
+    display: block;
+    overflow-x: auto;
+  }
 }
 
 @media print {
   body {
-    background: white;
+    background-color: white;
   }
+
   .raport {
+    max-width: none;
+    margin: 0;
+    padding: 20px;
+
+    border: none;
     box-shadow: none;
+  }
+
+  .raport-naglowek {
+    border-bottom: 2px solid #168aad;
+  }
+
+  .badge {
+    color: black;
+    background-color: transparent;
+    border: 1px solid #168aad;
   }
 }

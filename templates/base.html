@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mój Chatbot AI</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Chatbot</h1>
+      <nav>
+        <a href="/">Zapytaj AI </a>
+        <a href="/analysis-site">Analizuj dane </a>
+        <a href="/summary-site">Streszcz dowolny tekst </a>
+        <a class="logout" href="/logout">Wyloguj się </a>
+      </nav>
+    </header>
+    <main class="container">{% block content %}{% endblock %}</main>
+  </body>
+</html>

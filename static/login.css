@@ -1,0 +1,132 @@
+body {
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.leftBox {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40vw;
+  height: 100vh;
+  background-color: #168aad;
+  opacity: 90%;
+  border-top-right-radius: 200px;
+  border-bottom-right-radius: 200px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logLeft {
+  color: white;
+  text-align: center;
+  width: 80%;
+}
+
+.logLeft h1 {
+  font-size: 4.2vw;
+  margin-bottom: 2vh;
+}
+
+.logLeft p {
+  font-size: 2vw;
+  margin-bottom: 5vh;
+}
+
+.leftButton {
+  font-size: 1.5vw;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 1vw 3vw;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.leftButton:hover {
+  background-color: white;
+  color: #168aad;
+}
+
+.logRight {
+  flex: 1;
+  margin-left: 40vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logRight form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.logRight form::before {
+  content: "Zaloguj się!";
+  color: black;
+  font-weight: bold;
+  font-size: 4.2vw;
+  margin-bottom: 5vh;
+}
+
+.logRight input {
+  width: 30vw;
+  height: 3vw;
+  margin-bottom: 1.5vw;
+  padding: 0 1vw;
+
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 1.2vw;
+}
+
+.logRight button[type="submit"] {
+  background-color: #168aad;
+  color: white;
+  border: none;
+  border-radius: 10px;
+
+  width: 30vw;
+  height: 4vw;
+
+  font-size: 1.5vw;
+  cursor: pointer;
+}
+
+.logRight button[type="submit"]:hover {
+  background-color: #126f8a;
+}
+
+.logRight p {
+  font-size: 1.2vw;
+}
+
+.logRight a {
+  color: #168aad;
+  text-decoration: none;
+}
+
+.logRight a:hover {
+  text-decoration: underline;
+}
+
+.errorMessage {
+  color: #d22b2b;
+  font-size: 1.2vw;
+  margin-top: 1vw;
+  margin-bottom: 0;
+}

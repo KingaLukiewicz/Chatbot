@@ -1,42 +1,25 @@
-<!DOCTYPE html>
-<html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Mój Chatbot AI</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
-  </head>
-  <body>
-    <main class="container">
-      <nav>
-        <a href="/">Zapytaj AI </a> |
-        <a href="/analysis-site">Analizuj dane </a> |
-        <a href="/summary-site">Streszcz dowolny tekst </a>
-        <a href="/logout">Wyloguj się </a>
-      </nav>
-      <h1>Zapytaj AI</h1>
-      <form action="/ask" method="POST">
-        <textarea
-          name="pytanie"
-          id="pytanie"
-          rows="4"
-          placeholder="Wpisz swoje pytanie ."
-        >
-        </textarea>
-        <button type="submit">Wyślij</button>
-      </form>
-      {% if pytanie %}
-      <p><em>Twoje pytanie: {{ pytanie }} </em></p>
-      {% endif %}
-      <div class="answer-box">
-        {% if odpowiedz %}
-        <p>{{ odpowiedz }}</p>
-        {% else %}
-        <p>Tutaj pojawi się odpowiedź AI.</p>
-        {% endif %}
-      </div>
-    </main>
-  </body>
-</html>
+{% extends "base.html" %} {% block title %}Streszczenie AI{% endblock %} {%block
+content %}
+<h2>Zapytaj AI</h2>
+<form action="/ask" method="POST">
+  <textarea
+    name="pytanie"
+    id="pytanie"
+    rows="4"
+    placeholder="Wpisz swoje pytanie ."
+  >
+  </textarea>
+  <button type="submit">Wyślij</button>
+</form>
+{% if pytanie %}
+<p><em>Twoje pytanie: {{ pytanie }} </em></p>
+{% endif %}
+<div class="answer-box">
+  {% if odpowiedz %}
+  <p>{{ odpowiedz }}</p>
+  {% else %}
+  <p>Tutaj pojawi się odpowiedź AI.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

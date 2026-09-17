@@ -1,42 +1,24 @@
-<!DOCTYPE html>
-<html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Streszczenie AI</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
-  </head>
-  <body>
-    <main class="container">
-      <nav>
-        <a href="/">Zapytaj AI </a> |
-        <a href="/analysis-site">Analizuj dane </a> |
-        <a href="/summary-site">Streszcz dowolny tekst </a>
-        <a href="/logout">Wyloguj się </a>
-      </nav>
-      <h1>Streszczenie AI</h1>
-      <form action="/summarize" method="POST">
-        <textarea
-          name="tekst"
-          id="tekst"
-          rows="4"
-          placeholder="Wpisz tekst do streszczenia."
-        >
-        </textarea>
-        <button type="submit">Wyślij</button>
-      </form>
-      {% if tekst %}
-      <p><em>Twój tekst: {{ tekst }} </em></p>
-      {% endif %}
-      <div class="answer-box">
-        {% if streszczenie %}
-        <p>{{ streszczenie }}</p>
-        {% else %}
-        <p>Tutaj pojawi się streszczenie AI.</p>
-        {% endif %}
-      </div>
-    </main>
-  </body>
-</html>
+{% extends "base.html" %} {% block title %}Streszczenie AI{% endblock %} {%block
+content %}
+<h2>Streszczenie AI</h2>
+<form action="/summarize" method="POST">
+  <textarea
+    name="tekst"
+    id="tekst"
+    rows="4"
+    placeholder="Wpisz tekst do streszczenia."
+  >
+  </textarea>
+  <button type="submit">Wyślij</button>
+</form>
+{% if tekst %}
+<p><em>Twój tekst: {{ tekst }} </em></p>
+{% endif %}
+<div class="answer-box">
+  {% if streszczenie %}
+  <p>{{ streszczenie }}</p>
+  {% else %}
+  <p>Tutaj pojawi się streszczenie AI.</p>
+  {% endif %}
+</div>
+{% endblock %}
