@@ -1,14 +1,16 @@
 # Chatbot AI z analizą danych
 
-Aplikacja webowa łącząca czat z Claude z mozliwością wykorzystania go do streszczania tekstu lub analizy wysłanych plików CSV.
+Aplikacja webowa łącząca czat z Claude z możliwością wykorzystania AI do streszczania tekstów oraz analizy przesłanych plików CSV.
 
 # Funkcje
 
 - Czat z Claude z obsługą historii rozmowy
-- Upload plików CSV i automatyczna analiza z wykresem
-- Streszczanie tekstu z Claude
-- System logowania (hasła hashowane przez bcrypt)
-- Rate limiting i ochrona przed prompt injection
+- Upload plików CSV i automatyczna analiza danych wraz z wygenerowaniem wykresu
+- Streszczanie tekstów za pomocą Claude
+- System rejestracji i logowania użytkowników
+- Hasła zabezpieczone za pomocą bcrypt
+- Rate limiting ograniczający liczbę wysyłanych zapytań
+- Podstawowa ochrona przed prompt injection, dzięki oddzieleniu danych użytkownika od instrukcji dla modelu
 
 # Wymagania
 
